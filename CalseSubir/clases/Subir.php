@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Clase que abstrae la subida de archivos en PHP
  * @copyright (c) 2014, IZV
@@ -194,9 +195,12 @@ class Subir {
             $this->nombre = $nombreOriginal;
         }
         $origen = $this->files["tmp_name"];
+        echo $origen;
         $destino = $this->destino . $this->nombre . "." . $extension;
-        if ($this->accion == Subir::REEMPLAZAR) {
+        echo "<br>".$destino;
+        if ($this->accion == Subir::REEMPLAZAR) {             
             return move_uploaded_file($origen, $destino);
+            echo "Reemplaza";
         } elseif ($this->accion == Subir::IGNORAR) {
             if (file_exists($destino)) {
                 $this->error = -5;
@@ -204,8 +208,10 @@ class Subir {
             }
             return move_uploaded_file($origen, $destino);
         } elseif ($this->accion == Subir::RENOMBRAR) {
+            echo  "Renombra";
             $i = 1;
             while (file_exists($destino)) {
+               
                 $destino = $destino = $this->destino . $this->nombre . "_$i." . $extension;
                 $i++;
             }
@@ -214,14 +220,15 @@ class Subir {
         $this->error = -6;
         return false;
     }
+
     /**
      * 
      * @return boolean
      */
-    private function isArray (){
-        if (is_array($_FILES[$this->input])) {
+    function isArray() {
+        if (is_array($_files[$this->input])) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
