@@ -1,0 +1,6 @@
+    function set($datos, $inicio=0){
+        $this->id = $datos[0+$inicio];
+        $this->id = $datos[1+$inicio];
+        $this->id = $datos[2+$inicio];
+    
+}
