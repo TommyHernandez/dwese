@@ -12,17 +12,7 @@ class Configuracion {
      */
     const SERVIDOR = "localhost";
     const puerto = "3306";
-    const BASEDATOS = "bdphp";
-    const USUARIO="userphp";
-    const CLAVE="clavephp";
-    /*
-     * Otros parametros
-     */
-    const PEZARANIA = "pez araña";
-    const clavemail ="";
-    /**
-     * 
-     */
-    const RPP = 10;
-    
+    const BASEDATOS = "inmocasa";
+    const USUARIO="master";
+    const CLAVE="1234inmocasa5678";
 }

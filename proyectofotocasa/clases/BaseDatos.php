@@ -38,7 +38,7 @@ class BaseDatos {
 
     function getAutonumerico() {
         if ($id = $this->conexion->lastInsertId()) {
-            return id;
+            return $id;
         } else {
             return false;
         }
@@ -124,6 +124,9 @@ class BaseDatos {
     }
     function getError (){
         return $this->resultado->errorInfo();
+    }
+    function getErorres (){
+        mysql_errno($this->conexion) . ": " . mysql_error($this->conexion) . "\n";
     }
 
 }

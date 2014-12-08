@@ -1,13 +1,7 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * Description of ModeloPersona
+ * @version 0.9
  *
  * @author PedroTHDC
  */
@@ -48,11 +42,12 @@ class ModeloPersona {
             return $this->bd->getNumeroFilas();
         }
     }
-/**
- * 
- * @param Persona $objeto
- * @return type
- */
+
+    /**
+     * 
+     * @param Persona $objeto
+     * @return type
+     */
     function edit(Persona $objeto) {
 
         $parametros['id'] = $objeto->getId();
@@ -67,12 +62,13 @@ class ModeloPersona {
         }
         $bd->closeConsulta();
     }
-/**
- * 
- * @param Persona $objetoOriginal
- * @param Persona $objetoNuevo
- * @return type
- */
+
+    /**
+     * 
+     * @param Persona $objetoOriginal
+     * @param Persona $objetoNuevo
+     * @return type
+     */
     function editPk(Persona $objetoOriginal, Persona $objetoNuevo) {
 
         $parametros['id'] = $objetoNuevo->getId();
@@ -88,9 +84,10 @@ class ModeloPersona {
         }
         $bd->closeConsulta();
     }
-/**
- * 
- */
+
+    /**
+     * 
+     */
     function get() {
         $sql = "Select * FROM $this->tabla";
         if (!$r) {
@@ -102,41 +99,48 @@ class ModeloPersona {
             return $persona;
         }
     }
-/**
- * 
- * @param type $condicion
- * @param type $parametros
- * @return type
- * 
- */
+
+    /**
+     * 
+     * @param type $condicion
+     * @param type $parametros
+     * @return type
+     * 
+     */
     function getCount($condicion = "1=1", $parametros = array()) {
-        $sql = "select count(*) from $this->tabla WHERE $condion ";
+        $sql = "select count(*) from $this->tabla WHERE $condicion ";
         $r = $this->bd->setConsulta($sql, $parametros);
-        return $this->bd->getFila();
+        $tuplas = $this->bd->getFila();
+        return $tuplas[0];
     }
-/**
- * 
- * @param type $condicion
- * @param type $parametros
- * @param type $orderby
- * @return type
- */
-    function getList($condicion = "1=1", $parametros = array(), $orderby = 1) {
+
+    /**
+     * 
+     * @param type $condicion
+     * @param type $parametros
+     * @param type $orderby
+     * @return type
+     */
+    function getList($pagina = 0, $rpp = 10, $condicion = "1=1", $parametros = array(), $orderby = 1) {
         $list = array();
-        $sql = "select * from $this->tabla WHERE $condicion order by $orderby";
-        $r = $this->bd->setConsulta($sql,$parametros);
+        $principio = $rpp*$pagina;
+        $sql = "select * from $this->tabla WHERE $condicion order by $orderby limit $principio, $rpp";
+        $r = $this->bd->setConsulta($sql, $parametros);
         if (!$r) {
             return null;
-        }else{
-        while($fila = $this->bd->getFila()){
-            $persona = new Persona();
-            $persona->set($fila);
-            $list[] = $persona;
-        }
-            
+        } else {
+            while ($fila = $this->bd->getFila()) {
+                $persona = new Persona();
+                $persona->set($fila);
+                $list[] = $persona;
+                
+            }
+            return $list;
         }
     }
-    function selectHTML($id,$name,$condicion,$parametros, $paramentroBlanco = true){
+
+    function selectHTML($id, $name, $condicion, $parametros, $paramentroBlanco = true) {
         
     }
+
 }

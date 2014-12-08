@@ -1,12 +1,15 @@
 <!DOCTYPE html>
+<?php
+require '../clases/comun.php';
 
+?>
 <html>
     <head>
         <meta charset="UTF-8">
-        <title></title>
+        <title>Bienvenido</title>
     </head>
     <body>
-        <nav>
+         <nav>
             <ul>
                 <li><a href="viewalta.php">Darse de alta</a>  </li>
                 <li>
@@ -14,6 +17,10 @@
                 </li>
             </ul>            
         </nav>
-        <h1>Web para usuarios</h1>
+        <h1>Bienvenido!</h1>
+        <p>
+            Ya te has registrado en nuestra web.  <?php echo $mensaje; ?>
+        </p>
+      
     </body>
 </html>

@@ -50,7 +50,7 @@ class validar {
         
     }
 
-    static function isMinLong($l = 1) {
+    static function isMinLong($v, $l = 1) {
         
     }
 
@@ -73,5 +73,9 @@ class validar {
     static function isCondicion() {
         
     }
-
+    static function isAltaUsuario($login,$cave,$nombre,$apellidos,$email,$claveconfirmada){
+        return ;
+        
+        
+    }
 }
