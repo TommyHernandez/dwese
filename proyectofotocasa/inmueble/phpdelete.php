@@ -15,10 +15,10 @@ $id = Leer::get("id");
 //
 $r = $modelo->delete($id);
 $modeloFoto = new modeloFoto($bd);
-$filas = $modeloFoto->getList();
-var_dump($filas);
+$condicion= "idinmueble=$id";
+$filas = $modeloFoto->getList(0, 5, $condicion);
 foreach ($filas as $indice => $objeto){
    $un = $objeto->deleteArchivo();
    
 }
-header("Location: ../adminpanel.php?completado=$r");
+header("Location: ../adminpanel.php?completado=$r$un");

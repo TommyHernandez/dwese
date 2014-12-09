@@ -14,61 +14,56 @@ $precio = (double) LEER::post("precio");
 $localidad = LEER::post("localidad");
 $provincia = LEER::post("provincia");
 $tipo = strtolower(LEER::post("tipo"));
-$calle = LEER::post("superficie");
+$calle = LEER::post("calle");
 $superficie = (int) LEER::post("superficie");
 $cp = (int) LEER::post("cp");
 $objetivo = strtolower(LEER::post("objetivo"));
+
 //validamos y añadimos
 $objeto->setEstado($estado);
 $objeto->setObjetivo($objetivo);
 $objeto->setTipo($tipo);
 $objeto->setDescripcion($descripcion);
-$objeto->setCalle($calle);
-$objeto->setCp($cp);
-$objeto->setPrecio($precio);
-$objeto->setProvincia($provincia);
-$objeto->setSuperficie($superficie);
-$objeto->setLocalidad($localidad);
-$objeto->setTitulo($titulo);
-/*
-  if (!Validar::isLongitudMinima($titulo, 6)) {
-  exit();
-  }else{
-  $objeto->setTitulo($titulo);
+if (Validar::isLongitudMinima($titulo, 6)) {
+    $objeto->setTitulo($titulo);
+} else {
+    exit();
+}
+if (Validar::isLongitudMinima($localidad, 3)) {
+    $objeto->setLocalidad($localidad);
+} else {
+    
+}
+if (Validar::isLongitudMinima($provincia, 2)) {
+    $objeto->setProvincia($provincia);
+} else {
+    
+}
+if (Validar::isNumero($precio)) {
+    $objeto->setPrecio($precio);
+} else {
+    
+}
 
-  }
-  if (!Validar::isLongitudMinima($localidad, 6)) {
-  exit();
-  }else{
-  $objeto->setLocalidad($localidad);
-  }
-  if (!Validar::isLongitudMinima($provincia, 6)) {
-  exit();
-  }else{
-  $objeto->setProvincia($provincia);
-  }
-  if (!Validar::isNumero($precio)) {
-  exit();
-  }else{
-  $objeto->setPrecio($precio);
-  }
-
-  if (!Validar::isEntero($superficie)) {
-  exit();
-  }else{
-  $objeto->setSuperficie($superficie);
-  }
-  if (!Validar::isCP($cp)) {
-
-  }else{
-  $objeto->setCp($cp);
-  }
- */
+if (Validar::isEntero($superficie)) {
+    $objeto->setSuperficie($superficie);
+} else {
+    
+}
+if (Validar::isCP($cp)) {
+    $objeto->setCp($cp);
+} else {
+    
+}
+if (Validar::isLongitudMinima($calle, 4)) {
+    $objeto->setCalle($calle);
+} else {
+}
 //Creamos la base de datos y el modelo
 $bd = new BaseDatos();
 $modelo = new modeloInmueble($bd);
-//
 $r = $modelo->add($objeto);
+//Evitamos subir fotos y crear lso objetos correspondientees si la insercion no se hace correctamente
 if ($r != -1) {
     //subimos las fotos
     $subida = new Subir("fotos");

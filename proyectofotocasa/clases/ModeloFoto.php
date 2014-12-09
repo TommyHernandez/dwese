@@ -30,7 +30,7 @@ class modeloFoto {
         }
     }
 
-    function delete(Foto $id) {
+    function delete($id) {
         $parametros['id'] = $id;
         $sql = "delete FROM $this->tabla WHERE id=:id";
         $r = $this->bd->setConsulta($sql, $parametros);
@@ -71,15 +71,16 @@ class modeloFoto {
      * 
      * @return Foto
      */
-    function get() {
-        $sql = "Select * FROM $this->tabla";
+    function get($condicion = "1=1") {
+        $sql = "Select * FROM $this->tabla WHERE $condicion";
+        $r = $this->bd->setConsulta($sql);
         if (!$r) {
             return null;
         } else {
-            $fila = new $this->bd->getFila();
+            $fila = $this->bd->getFila();
             $foto = new Foto();
             $foto->set($fila);
-            return $persona;
+            return $foto;
         }
     }
 
@@ -90,9 +91,41 @@ class modeloFoto {
      * @param type $orderby
      * @return \Foto
      */
-    function getList($principio = 0, $rpp = 5, $condicion = "1=1", $parametros = array(), $orderby = 1) {
+    function getList($principio = 0, $rpp = 5, $condicion = "1=1", $orderby = 1, $parametros = array()) {
         $list = array();
         $sql = "select * from $this->tabla WHERE $condicion order by $orderby limit $principio, $rpp";
+        $r = $this->bd->setConsulta($sql, $parametros);
+        if (!$r) {
+            return null;
+        } else {
+            while ($fila = $this->bd->getFila()) {
+                $foto = new Foto();
+                $foto->set($fila);
+                $list[] = $foto;
+            }
+            return $list;
+        }
+    }
+
+    /**
+     * A este merodo le pasamos una lista de ids y nos devuelve los objeto foto de todas las fotos correspondientes a ese id
+     * partiendo de que las fotos estan en una tabla distita.
+     * @param type $ids
+     * @return \Foto
+     */
+    function getListDe($ids = array()) {
+        $list = array();
+        $parametros = array();
+        $numeracion = 0;
+        for ($i = 0; $i < sizeof($ids); $i++) {
+            if ($i == sizeof($ids) - 1) {
+                $numeracion = $ids[$i];
+            } else {
+                $numeracion = $ids[$i] . ", ";
+            }
+        }
+        $condicion = 'idinmueble in (' . $numeracion . ')';
+        $sql = "select * from $this->tabla WHERE $condicion";
         $r = $this->bd->setConsulta($sql, $parametros);
         if (!$r) {
             return null;

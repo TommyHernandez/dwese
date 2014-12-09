@@ -47,7 +47,7 @@ $filas = $modelo->getList($inicio, $rpp = 10);
         <section id="cuerpo">
             <div id="cuerpo-inicial"> 
                 <h3>Total de inmuebles</h3>          
-                <table>
+                <table id="admin-table">
                     <tr>
                         <th>Titulo</th>
                         <th>Descripcion</th>
@@ -62,6 +62,8 @@ $filas = $modelo->getList($inicio, $rpp = 10);
                         <th>Objetivo</th>
                         <th>Fecha Anuncio</th>
                         <th>Eliminar</th>
+                        <th>Modificar Fotos</th>
+                        <th>Edtar</th>
 
                     </tr>
                     <?php
@@ -80,7 +82,9 @@ $filas = $modelo->getList($inicio, $rpp = 10);
                             <td><?php echo $objeto->getCp(); ?></td>
                             <td><?php echo $objeto->getObjetivo(); ?></td>
                             <td><?php echo $objeto->getFecha(); ?></td>
-                            <td><a id ="eliminador" href="<?php echo "inmueble/phpdelete.php?id=" . $objeto->getId() ?>" >Eliminar</a></td>
+                            <td><a class ="eliminador" href="<?php echo "inmueble/phpdelete.php?id=" . $objeto->getId() ?>" ><img src="img/delete48.png" title="eliminar foto" alt="borrar"/></a></td>
+                            <td><a class ="fotoedit" href="<?php echo "foto/viewfoto.php?id=" . $objeto->getId() ?>" >Ir a fotos</a></td>
+                            <td><a class ="editador" href="<?php echo "inmueble/viewedit.php?id=" . $objeto->getId() ?>" >Editar</a></td>
 
                         </tr>  
                         <?php
@@ -94,7 +98,7 @@ $filas = $modelo->getList($inicio, $rpp = 10);
                 <form name="insert" action="inmueble/phpinsert.php" method="POST" enctype="multipart/form-data">
                     <label for="titulo">
                         Titulo:
-                        <input type="text" id="titulo" name="titulo" value="" required autofocus/>
+                        <input type="text" id="titulo" name="titulo" value="" required autofocus minlenght="6"/>
                     </label>
                     <br/>
                     <label for="descripcion">
@@ -112,12 +116,12 @@ $filas = $modelo->getList($inicio, $rpp = 10);
                     <br/>
                     <label for="precio">
                         Precio:
-                        <input type="number" id="precio" name="precio" value="" />
+                        <input type="number" id="precio" name="precio" value="" required /><span></span>
                     </label>
                     <br/>
                     <label for="localidad">
                         Localidad:
-                        <input type="text" id="localidad" name="localidad" value="" />
+                        <input type="text" id="localidad" name="localidad" value="" required/>
                     </label>
                     <br/>
                     <label for="provincia">
@@ -153,12 +157,12 @@ $filas = $modelo->getList($inicio, $rpp = 10);
                     <br/>
                     <label for="cp">
                         Codigo Postal:
-                        <input type="number"  id="cp" name="cp" maxlength="5" value="" />
+                        <input type="number"  id="cp" name="cp" maxlength="5" value="" /><span></span>
                     </label>
                     <br/>
                     <label for="superficie">
                         Superficie:
-                        <input type="number" id="superficie" name="superficie" value="" required/>
+                        <input type="number" id="superficie" name="superficie" value="" required/><span></span>
                     </label>
                     <br/>
                     <label for="objetivo">
@@ -169,9 +173,10 @@ $filas = $modelo->getList($inicio, $rpp = 10);
                         </select>
                     </label>
                     <br/>
-                    <label for="foto">
+                    <label>
                         Fotos:
-                        <input type="file" name="fotos[]" value="" multiple/>(puede elegir mas de una)
+                        <input type="file" name="fotos[]" value="" />
+                        <input type="file" name="fotos[]" value="" />
                     </label>
                     <br/>
                     <input type="submit" id="enviar" class="boton" value="Añadir" />
@@ -179,8 +184,13 @@ $filas = $modelo->getList($inicio, $rpp = 10);
                 </form>
 
             </div>
-            <div><p>Copyright</p></div>
+            
         </section>
+        <footer>
+            <div class="centrado">
+                <p>Copyright inmocasa 2014</p>
+            </div>
+        </footer>
     </body>
 
 </html>

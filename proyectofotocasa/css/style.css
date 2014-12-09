@@ -17,6 +17,7 @@ height:100%;
     width: 7.463157%;
     height: 100%;
     color:#FFF;
+    cursor: pointer;
 }
 #cuerpo {
     min-width: 800px;
@@ -220,5 +221,13 @@ nav li {
 }
 #tabla-index{
     margin:auto;
+    text-align: center;
+}
+#lista-acc {
+    cursor: pointer;
+}
+
+#admin-table td {
+    padding: 10px;
     text-align: center;
 }

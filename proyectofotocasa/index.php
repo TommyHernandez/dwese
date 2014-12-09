@@ -12,7 +12,8 @@ $filas = $modelo->getList($inicio, $rpp = 10,"1=1","fecha asc");
 $filasfotos = $modeloFoto->getList($inicio, $rpp = 10);
 //
 $adminpanel = "<a href='adminpanel.php'>Panel</a>";
-$idinsertadas = [];
+//
+$idinsertadas[] = array();
 
 foreach ($filasfotos as $indice =>$foto){
     if (!in_array($foto->getIdinmueble(), $idinsertadas)) {
@@ -28,6 +29,7 @@ foreach ($filasfotos as $indice =>$foto){
         <meta charset="UTF-8">
         <title>InmoCasa</title>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" />
+        
     </head>
 
     <body>
