@@ -63,4 +63,4 @@ if (Validar::isLongitudMinima($calle, 4)) {
 $bd = new BaseDatos();
 $modelo = new modeloInmueble($bd);
 $r = $modelo->edit($objeto);
-header("Location: ../adminpanel.pbp?correcto=$r");
+header("Location: ../adminpanel.php?correcto=$r");

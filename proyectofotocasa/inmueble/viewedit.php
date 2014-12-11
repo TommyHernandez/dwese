@@ -30,7 +30,7 @@ $bd->closeConexion();
     <head>
         <meta charset="UTF-8">
         <title>Edicion</title>
-        <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" />
+        <!--link rel="stylesheet" href="../css/style.css" type="text/css" media="screen" /-->
     </head>
     <body>
         <header id="cabecera">
