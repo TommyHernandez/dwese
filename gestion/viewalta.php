@@ -3,23 +3,22 @@
     <head>
         <meta charset="UTF-8">
         <title>Registro</title>
+        <link type="stylesheet" href="css/style.css" type="text/css" />
         <script src=""></script>
 
     </head>
     <body>
         <div class="wrapper">
             <!-- Header -->
-
+             <div class="wrapper">
+            <!-- Header -->
             <header id="header">
-                <h1>Gestion</h1>
-                <nav id="nav">
-                    <ul>
+                <nav id="navegator">
+                    <ul id="nav">
                         <li><a href="index.html">Home</a>
                         </li>
                         <li><a href="viewalta.php" >Registro</a>
-                        </li>
-                        <li><a href="login.php"  class="btn2"> Login</a>
-                        </li>
+                        
                     </ul>
                 </nav>
             </header>

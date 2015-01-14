@@ -22,6 +22,12 @@ switch ($elec) {
         $usuario->setEmail(Leer::post("mail"));
         $r = $modelo->edit($usuario, $login);
         if ($r) {
+            $id = md5($email . Configuracion::PEZARANIA . $login);
+    $enlace = Entorno::getEnlaceCarpeta("phpconfirmar.php?id=" . $id);
+    $mensaje = "Hola $login has soliciatado cambiar tu correo, para activar tu cuenta haz clic aqui <a href='" . $enlace . "'> Click aqui para confirmar</a>";
+    //$r = correo::enviarGmail("pedrothdc@gmail.com", $email, "Tomson6111992", "Bienvenido!", $mensaje);
+        }
+        if ($r) {
             header("Location: userpanel.php?error=0");
         } else {
             header("Location: userpanel.php?error=-3");

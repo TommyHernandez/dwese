@@ -7,9 +7,9 @@ $modelo = new ModeloUsuario($bd);
 $sesion->administrador("../");
 $usuario = $sesion->getUsuario();
 $bd = new BaseDatos();
-$modelo = new ModeloUsuario($bd);
+$modelo = new ModeloLog($bd);
 $pagina = 0;
-$filas = $modelo->getList($pagina, 3);
+$filas = $modelo->getList($pagina, 5);
 if (Leer::get('pagina')) {
     $pagina = Leer::get("pagina");
 }
@@ -42,7 +42,7 @@ $enlaces = Paginacion::getEnlacesPaginacion($pagina, $modelo->getCount(), Config
                 <h2>Opciones de Perfil</h2>
                 <ul class="opciones">
                     <li id="m1">Añadir usuarios</li>
-                    <li><a href="viewLog.php">Ver LOGS</a></li>
+                    <li><a href="panel.php">Home-Panel</a> </li>
 
                 </ul>
                 <p><span><a href="../index.php">Index</a></span>
@@ -50,34 +50,23 @@ $enlaces = Paginacion::getEnlacesPaginacion($pagina, $modelo->getCount(), Config
             </section>
     <section id="cuerpo">
         <div id="cuerpo-inicial">
-            <h3>Usuarios</h3>
+            <h3>Login de Usuarios</h3>
             <table id="admin-table">
                 <tr>
+                    <th>id</th>
                     <th>login</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>email</th>
-                    <th>Fecha Alta</th>
-                    <th>Activo</th>
-                    <th>Rol</th>
-                    <th>Ultimo Login</th>
-                    <th>Eliminar</th>
-                    <th>Editar</th>                
+                    <th>fecha</th>
+                    <th>tipo</th>
+                                    
                 </tr>
                 <?php
                 foreach ($filas as $indice => $objeto) {
                     ?>
                     <tr>
-                        <td><?php echo $objeto->getLogin(); ?></td>
-                        <td> <?php echo $objeto->getNombre(); ?> </td>
-                        <td> <?php echo $objeto->getApellidos(); ?></td>
-                        <td> <?php echo $objeto->getEmail(); ?> </td>
-                        <td> <?php echo $objeto->getFechaAlta(); ?></td>
-                        <td> <?php echo $objeto->getIsActive(); ?></td>
-                        <td> <?php echo $objeto->getRol(); ?> </td>
-                        <td> <?php echo $objeto->getFechaLogin(); ?></td>
-                        <td><a class ="eliminador" href="<?php echo "../usuario/phpdelete.php?login=" . $objeto->getLogin() ?>" ><img src="../images/delete.png" title="eliminar foto" alt="borrar"/></a></td>
-                        <td><a class ="editador" href="<?php echo "../usuario/viewedit.php?login=" . $objeto->getLogin() ?>" >Editar</a></td>
+                        <td><?php echo $objeto->getid(); ?></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
 
                     </tr>
                     <?php

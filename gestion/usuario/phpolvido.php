@@ -13,14 +13,7 @@ if (Leer::post("login") != "") {
    
     echo $mensaje;    
     } else {
-        header("Location: ../login.php?err=-1");
-    }
-} else if (Leer::post("correo" != "")) {
-    $mail = Leer::post("correo");
-    $condicion = "email = '$mail'";
-    $objetos = $modelo->getList($condicion);
-    if (is_array($objetos)) {
-        
+        header("Location: ../login.php?err=-11");
     }
 }
 ?>

@@ -22,6 +22,7 @@ $bd->closeConexion();
     <head>
         <meta charset="UTF-8">
         <title>Edicion de Usuario</title>
+        <link rel="stylesheet" href="css/style.css" type="text/css"/>
     </head>
     <body>
         <h1>Formulario de Edicion</h1>

@@ -216,5 +216,15 @@ class ModeloUsuario {
     function desactivar($login){
         
     }
+    function setFecha($login){
+        $sql = "UPDATE `usuario` SET fechalogin = CURDATE() where login = :login";
+        $parametros["login"] = $login;
+        $r = $this->bd->setConsulta($sql, $parametros);
+        if ($r) {
+            return true;
+        }else{
+            return $r;
+        }
+    }
 
 }
