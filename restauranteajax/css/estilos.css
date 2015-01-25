@@ -1,0 +1,124 @@
+html,
+body {
+    height: 100%;
+}
+body {
+    margin: 0px;
+    padding: 0px;
+    background-image: url(../imagenes/texturaback.jpg);
+}
+.list-nav {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    justify-content: space-around;
+    align-content: center;
+    flex: 1;
+}
+.list-nav a {
+    text-decoration: none;
+    color: #000;
+}
+.wrapper {
+    display: flex;
+    height: 1080px;
+    background-image: url(../imagenes/principal.png);
+    background-repeat: no-repeat;
+    align-content: flex-end;
+}
+#barra {
+    display: flex;
+    flex flex-direction: row;
+    width: 100%;
+    height: 60px;
+    background-color: rgba(255, 255, 255, 0.84);
+    justify-content: flex-start;
+    align-items: center;
+}
+.nav {
+    height: 60px;
+    line-height: 60px;
+    margin-left: 10px;
+    max-width: 324;
+}
+.carta {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;        
+    margin-top: 20px;
+}
+.item {
+    height: 329px;
+    margin-left: 4px;
+    margin-top: 5px;
+}
+.carta-large {
+    flex: 2 1 806px;
+    background-color: pink;
+    max-width: 806px;
+}
+.carta-short {
+    flex: 1 1 405px;
+    background-color: blue;
+    max-width: 405px;
+}
+.wrapper-carta {
+    height: 100%;
+    background-image: url(../imagenes/texturaback.jpg);
+}
+#plato1 {
+    background-image: url(../imagenes/COM-CHIEN.jpg);
+}
+#plato2 {
+    background-image: url(../imagenes/segundo-plato.jpg);
+}
+#plato3 {
+    background-image: url(../imagenes/tercerPlato.jpg);
+}
+#plato4 {
+    background-image: url(../imagenes/tom-yam-kung.jpg);
+}
+#plato5 {
+    display: flex;
+    background-image: url(../imagenes/banh-canh-cua-bot-gao.jpg);
+    background-repeat: no-repeat;
+    align-items: flex-end;
+}
+#plato6 {
+    background-image: url(../imagenes/platos-6.jpg);
+}
+#pie {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    height: 200px;
+    width: 100%;
+    background-color: RGBA(255, 255, 255, 0.7);
+    margin-bottom: 0px;
+}
+.reserva {
+    flex: 1 1 234px;
+    height: 400px;
+    max-width: 234px;
+    background-color: RGBA(255, 255, 255, 0.7);
+    margin-left: 10px;
+    margin-top: 5px;
+}
+.tipo-item {
+    flex: 1 0 234px;
+}
+.mosaico {
+    display: flex;
+    align-items: stretch;
+    flex-wrap: wrap;
+}
+
+#mapa {
+    width: 100%;
+    height: 700px;
+}
+
+.pie-item {
+    flex: 1 1 300px;
+    margin 20px;
+}
