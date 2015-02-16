@@ -8,9 +8,6 @@
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="../css/estilos.css" type="text/css">
         <link rel="stylesheet" href="../js/toast/toastr.css">
-        <link rel="stylesheet" href="../css/slimbox.css" type="text/css" media="screen" />
-        <script type="text/javascript" src="js/mootools.js"></script>
-        <script type="text/javascript" src="js/slimbox.js"></script>
     </head>
 
     <body>
@@ -68,7 +65,9 @@
                             </textarea>
                             <label>Precio</label>
                             <input type="number" id="precio" value="" class="form-control" placeholder="Precio del plato" />
-                            <input type="file" id="files" name="files[]" multiple />
+                            <input type="file" id="files" name="files[]" />
+                             <input type="file" id="files" name="files[]" />
+                              <input type="file" id="files" name="files[]" />
                             <output id="list"></output>
                         </div>
                         <input type="button" id="enviar-plato" class="btn btn-default" value="Enviar" name="send" />  
@@ -88,7 +87,6 @@
             ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
-        <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha1.js"></script>
         <script src="../js/bootstrap.min.js"></script>
         <script src="../js/toast/toastr.js"></script>
         <script src="js/main.js"></script>

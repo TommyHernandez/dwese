@@ -12,13 +12,15 @@
  * @author Tomas
  */
 class ModeloFoto {
-     private $bd = null;
+
+    private $bd = null;
     private $tabla = "fotos";
 
     function __construct($bd) {
         $this->bd = $bd;
     }
-      function add(foto $objeto) {
+
+    function add(foto $objeto) {
         $sql = "insert into " . $this->tabla . " values( :id, :pid,"
                 . ":ruta)";
         $parametros["id"] = $objeto->getId();
@@ -81,18 +83,49 @@ class ModeloFoto {
         return $r;
     }
     
-    function getRutaId($id){
+      function getRutaJSON($id) {
         $sql = "select * from "
                 . $this->tabla .
-                " where id=:id";
-        $parametros["id"] = $id;
-        $rutas = array();
-         $this->bd->setConsulta($sql, $parametros);
-          while ($fila = $this->bd->getFila()) {
+                " where idp=$id";
+        $parametros = array();
+        $this->bd->setConsulta($sql, $parametros);
+        $r = "[ ";
+        while ($fila = $this->bd->getFila()) {
             $objeto = new foto();
             $objeto->set($fila);
-            $rustas[]= $objeto->getRuta();
+            $r .= $objeto->getRutaJSON() . ",";
+        }
+        $r = substr($r, 0, -1) . "]";
+        return $r;
+    }
+
+    function getConsulta($condicion = "1=1", $parametros = array(), $orderby = "1") {
+        $list = array();
+        $sql = "select * from $this->tabla where $condicion order by $orderby";
+        $r = $this->bd->setConsulta($sql, $parametros);
+        if ($r) {
+            while ($fila = $this->bd->getFila()) {
+                $foto = new foto();
+                $foto->set($fila);
+                $list[] = $foto;
+            }
+        }
+        return $list;
+    }
+
+    function getRutaId($id) {
+        $sql = "select * from  $this->tabla where id=$id";
+        $parametros =array();
+        $rutas = array();
+        $r = $this->bd->setConsulta($sql, $parametros);
+        if ($r) {
+            while ($fila = $this->bd->getFila()) {
+                $foto = new foto();
+                $foto->set($fila);
+                $rutas[] = $foto->getRuta();
+            }
         }
         return $rutas;
     }
+
 }

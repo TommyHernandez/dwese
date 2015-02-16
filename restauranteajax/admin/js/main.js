@@ -102,7 +102,27 @@ function destruirTabla() {
         div.removeChild(div.firstChild);
     }
 }
+function verEditar(){
+    $("#add-plato").deleteClass("oculto");
+    var id = this.getAttribute('data-editar');
+    $.ajax({
+            url: "ajaxget.php?id=" + id,
+            success: function (result) {
+                var nombre = document.getElementById('nombre').value = result.login;
+                var descripcion = document.getElementById('descp').value = "";
+                var precio = document.getElementById('precio').value = result.nombre;
+               for (var i = 0;i < result.rutas.lenght; i++) {
+                var img = $("<img/>").addClass("thumb");
+                img.attr("src",result.rutas.ruta);
+                $("#list").append(img);
+            }
 
+            },
+            error: function () {
+                tostada("AJAX FALLO al procesar al usuario", 3);
+            }
+        });
+}
 function construirTabla(datos) {
     var tabla = document.getElementById("lista-platos");
     var tr, td;

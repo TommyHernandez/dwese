@@ -64,5 +64,5 @@ class Plato {
         $resp = substr($resp, 0, -1) . "}";
         return $resp;
     }
-
+   
 }

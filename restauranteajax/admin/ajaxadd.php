@@ -13,22 +13,7 @@ if ($tipo == 1) {
     $modeloforo = new ModeloFoto($bd);
     $r = $modelo->add($plato);
     /* Subimos los archivos */
-    if (isset($_FILES["archivo"])) {
-        $numerodearchivos = $_POST["numerodearchivos"];
-        if ($_FILES["archivo"]["error"] > 0) {
-            foreach ($_FILES["archivo"]["error"] as $indice => $valor) {
-                if ($valor == UPLOAD_ERR_OK) {
-                    $tmp = $_FILES["archivo"]["tmp_name"][$indice];
-                    $name = $_FILES["archivo"]["name"][$indice];
-                    move_uploaded_file($tmp, "../fotos/" . $name);
-                    $objetoFoto = new foto(NULL, $pid, "fotos/" . $name);
-                    $modeloFoto->add($objetoFoto);
-                } else {
-                    
-                }
-            }
-        }
-    }
+  
     /* FIN */
     if ($r) {
         echo '{"status": true}';

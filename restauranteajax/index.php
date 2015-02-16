@@ -1,3 +1,10 @@
+<?php
+require 'require/comun.php';
+$bd = new BaseDatos();
+$modelo = new ModeloPlato($bd);
+$modeloFoto = new ModeloFoto($bd);
+$platos = $modelo->getListPagina();
+?>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -11,8 +18,8 @@
         <link rel="stylesheet" href="js/toast/toastr.css">
         <script src="js/toast/toastr.js"></script>
         <link rel="stylesheet" href="css/slimbox.css" type="text/css" media="screen" />
-        <script type="text/javascript" src="js/mootools.js"></script>
-        <script type="text/javascript" src="js/slimbox.js"></script>
+        <script src="js/mootools.js"></script>
+        <script src="js/slimbox.js"></script>
     </head>
     <body>
         <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -39,28 +46,28 @@
             <div class="jumbotron">
                 <h1>Menu del día</h1>
                 <p>Podras consultar nuestro menú a diario</p>
-            </div>
-            <div class="row">
-                <!--fila principal-->
+            </div>            
+            <!--fila principal-->
+            <?php foreach ($platos as $inidice => $objeto) { ?>
                 <div class="row">
+                    <?php $fotos = $modeloFoto->getRutaId($objeto->getId()); ?>
                     <div class="col-md-4">
-
+                        <a href="fotos/<?php echo $fotos[0]; ?>" class="image-link" rel="lightbox-grupo" title="Foto del plato">
+                            <img class="img-thumbnail" src="fotos/<?php echo $fotos[0]; ?>">
+                        </a>
+                        <a href="fotos/<?php echo $fotos[0]; ?>" class="image-link" rel="lightbox-grupo" title="Foto del plato">
+                            <img class="oculto" src="fotos/<?php echo $fotos[1]; ?>">
+                            <img class="oculto" src="fotos/<?php echo $fotos[2]; ?>">
+                        </a>
                     </div>
                     <div class="col-md-4">
-
-                    </div>
-                    <div class="col-md-4">
-
+                        <p><h4><?php $objeto->getNombre(); ?></h4>
+                        <?php echo $objeto->getDescripcion() ?>
+                        </p>
+                        <footer><?php echo $objeto->getNombre(); ?></footer>
                     </div>
                 </div>
-            </div>
-            <!-- Fin de la fila principal -->
-            <div class="row">
-
-            </div>
-            <div class="row">
-
-            </div>
+            <?php } ?>    
 
         </div><!-- /.container -->
         <!-- Bootstrap core JavaScript

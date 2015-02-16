@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Description of foto
  *
@@ -52,6 +53,11 @@ class foto {
         }
         $resp = substr($resp, 0, -1) . "}";
         return $resp;
+    }
+
+    public function getRutaJSON() {
+        $ruta =  '{"ruta":'.json_encode(htmlspecialchars_decode($this->ruta).'');
+        return $ruta.'}';
     }
 
 }

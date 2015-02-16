@@ -38,6 +38,21 @@ class ModeloPlato {
         return -1;
     }
 
+    function getListPagina($pagina = 0, $rpp = 3, $condicion = "1=1", $parametros = array(), $orderby = "1") {
+        $pos = $pagina * $rpp;
+        $sql = "select * from "
+                . $this->tabla .
+                " where $condicion order by $orderby limit $pos, $rpp";
+        $r = $this->bd->setConsulta($sql, $parametros);
+        $respuesta = array();
+        while ($fila = $this->bd->getFila()) {
+            $objeto = new Plato();
+            $objeto->set($fila);
+            $respuesta[] = $objeto;
+        }
+        return $respuesta;
+    }
+
     function delete(Plato $objeto) {
         $sql = "delete from $this->tabla where id = :id";
         $parametros["id"] = $objeto->getId();
@@ -46,6 +61,20 @@ class ModeloPlato {
             return -1;
         }
         return $this->bd->getNumeroFilas();
+    }
+
+    function getConsulta($condicion = "1=1", $parametros = array(), $orderby = "1") {
+        $list = array();
+        $sql = "select * from $this->tabla where $condicion order by $orderby";
+        $r = $this->bd->setConsulta($sql, $parametros);
+        if ($r) {
+            while ($fila = $this->bd->getFila()) {
+                $usuario = new Plato();
+                $usuario->set($fila);
+                $list[] = $usuario;
+            }
+        }
+        return $list;
     }
 
     function get($id) {
