@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Der kaufladen-Cesta</title>
+        <!-- Modernizr -->
+        <script src="js/libs/modernizr-2.6.2.min.js"></script>
+        <!-- framework css -->
+        <link type="text/css" rel="stylesheet" href="../css/groundwork.css">
+        <link type="text/css" rel="stylesheet" href="../css/estilos.css">
+        <script type="text/javascript" src="../js/libs/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript" src="../js/groundwork.all.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Der Kaufladen</h1>
+            <hr>
+            <div class="align-right padded"><a href="../index.php" rel="home">Inicio</a></div>
+            <h3>Cesta Actual</h3>
+            <div class="row">
+                <div class="one half">
+                    {contenido}
+                </div>
+                <div class="one half">                    
+                    <form method="post" action="../producto/viewcompletar.php">
+                        <fieldset>
+                            <legend>Datos del Cliente</legend>
+                            <label>Nombre</label>
+                            <input type="text" name="nombre" value="" placeholder="Nombre" />
+                            <label>Dirección de envio</label>
+                            <input type="text" name="direnvio" value="" placeholder="Envio" />
+                            <input type="text" name="total" class="hidden" value="{total}" />                            
+                            <input type="submit" class="orange" value="Continuar" />
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
