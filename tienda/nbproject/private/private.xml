@@ -4,12 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/xampp/htdocs/tienda/producto/viewcompletar.php</file>
-            <file>file:/C:/xampp/htdocs/tienda/clases/Controlador.php</file>
-            <file>file:/C:/xampp/htdocs/tienda/clases/BaseDatos.php</file>
-            <file>file:/C:/xampp/htdocs/tienda/clases/ModeloVenta.php</file>
-            <file>file:/C:/xampp/htdocs/tienda/clases/ModeloDetalleVenta.php</file>
-            <file>file:/C:/xampp/htdocs/tienda/plantilla/plantilla.html</file>
-            <file>file:/C:/xampp/htdocs/tienda/clases/DetalleVenta.php</file>
+            <file>file:/C:/xampp/htdocs/tienda/clases/ModeloProducto.php</file>
+            <file>file:/C:/xampp/htdocs/tienda/producto/phpeditar.php</file>
+            <file>file:/C:/xampp/htdocs/tienda/clases/Venta.php</file>
+            <file>file:/C:/xampp/htdocs/tienda/admin/index.php</file>
+            <file>file:/C:/xampp/htdocs/tienda/getpago.php</file>
+            <file>file:/C:/xampp/htdocs/tienda/producto/viewedit.php</file>
         </group>
     </open-files>
 </project-private>

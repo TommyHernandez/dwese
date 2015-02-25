@@ -16,13 +16,13 @@ class Controlador {
         foreach ($cesta as $key => $value) {
             $total += $value->getProducto()->getPrecio() * $value->getCantidad();
             $datos = array(
-            "nombre" => $value->getProducto()->getNombre(),
-            "descripcion" => $value->getProducto()->getdescripcion(),
-            "preciound" => $value->getProducto()->getPrecio(),
-            "cantidad" => $value->getCantidad(),
-            "aniadir" => '<a href="../do/?id='.$value->getProducto()->getId().'&accion=insert"> Añadir Uno</a>',
-            "borrar" => '<a href="../do/?id='.$value->getProducto()->getId().'&accion=resta">Restar Uno</a>',
-            "eliminar" =>'<a href="../do/?id='.$value->getProducto()->getId().'&accion=del">Borrar</a>'
+                "nombre" => $value->getProducto()->getNombre(),
+                "descripcion" => $value->getProducto()->getdescripcion(),
+                "preciound" => $value->getProducto()->getPrecio(),
+                "cantidad" => $value->getCantidad(),
+                "aniadir" => '<a href="../do/?id=' . $value->getProducto()->getId() . '&accion=insert"> Añadir Uno</a>',
+                "borrar" => '<a href="../do/?id=' . $value->getProducto()->getId() . '&accion=resta">Restar Uno</a>',
+                "eliminar" => '<a href="../do/?id=' . $value->getProducto()->getId() . '&accion=del">Borrar</a>'
             );
             $v = new Vista("plantillaCestaDetalle", $datos);
             $filas.= $v->renderData();
@@ -54,7 +54,6 @@ class Controlador {
         $cesta = $_SESSION['__cesta'];
         $cesta->supLinea($id);
         $_SESSION["__cesta"] = $cesta;
-
         header("Location: ../index.php");
     }
 
@@ -65,7 +64,7 @@ class Controlador {
         if (!isset($_SESSION["__cesta"])) {
             $_SESSION["__cesta"] = new Cesta();
         }
-        echo $id;
+        
         $cesta = $_SESSION["__cesta"];
         $modelo = new ModeloProducto(new BaseDatos());
         $producto = $modelo->get($id);
@@ -101,19 +100,13 @@ class Controlador {
         if ($metodo == "insert") {
             $this->insertProducto();
         } else if ($metodo == "resta") {
-            echo $metodo;
+           
             $this->restaProducto();
         } else if ($metodo == "ver") {
             $this->viewCesta();
         } else if ($metodo = "del") {
             $this->delProducto();
         }
-        /* if (method_exists($this, $metodo)) {
-          echo $metodo;
-          $this->$metodo();
-          } else {
-          echo "No se ha encontrado";
-          } */
         exit();
     }
 

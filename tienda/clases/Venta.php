@@ -17,10 +17,11 @@ class Venta {
     }
  function set($datos, $inicio = 0) {
         $this->id = $datos[0 + $inicio];
-        $this->nombre = $datos[1 + $inicio];
-        $this->precio = $datos[2 + $inicio];
-        $this->iva = $datos[3 + $inicio];
-        $this->descripcion = $datos[4 + $inicio];
+        $this->fecha = $datos[1 + $inicio];
+        $this->hora = $datos[2 + $inicio];
+        $this->pago = $datos[3 + $inicio];
+        $this->direnvio = $datos[4 + $inicio];
+         $this->nombre = $datos[5 + $inicio];
     }
     function getId() {
         return $this->id;

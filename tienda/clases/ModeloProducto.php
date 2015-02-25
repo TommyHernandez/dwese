@@ -30,6 +30,28 @@ class ModeloProducto {
         return $r;
     }
 
+    function editSinClave(Producto $objeto) {
+        $asignacion = "id = :id,"
+                . "nombre = :nombre, precio = :precio, "
+                . "iva = :iva, descripcion = :descripcion";
+        $condicion = "id = :id";
+        $parametros["id"] = $objeto->getId();
+        $parametros["nombre"] = $objeto->getNombre();
+        $parametros["precio"] = $objeto->getPrecio();
+        $parametros["iva"] = $objeto->getIva();
+        $parametros["descripcion"] = $objeto->getDescripcion();
+        return $this->editConsulta($asignacion, $condicion, $parametros);
+    }
+
+    function editConsulta($asignacion, $condicion = "1=1", $parametros = array()) {
+        $sql = "update $this->tabla set $asignacion where $condicion";
+        $r = $this->bd->setConsulta($sql, $parametros);
+        if (!$r) {
+            return -1;
+        }
+        return $this->bd->getNumeroFilas();
+    }
+
     function count($condicion = "1=1", $parametros = array()) {
         $sql = "select count(*) from $this->tabla where $condicion";
         $r = $this->bd->setConsulta($sql, $parametros);

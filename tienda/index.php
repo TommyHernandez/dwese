@@ -36,13 +36,19 @@ if (isset($_SESSION["__cesta"])) {
                 <article class="four fifths">
                     <!--div class="row"-->
                     <?php foreach ($productos as $key => $objeto) { ?>
-
-                        <?php if ($key % 2 != 0) { ?>
-                            <div class="one fourth three-up-small-tablet two-up-mobile padded bounceInDown animated">
+                        <?php if ($key % 2 == 0) { ?>
+                            <div class="one fourth three-up-small-tablet two-up-mobile padded bounceInUp animated">
+                            <?php } else { ?>
+                                <div class="one fourth three-up-small-tablet two-up-mobile padded bounceInDown animated">
+                                <?php } ?> 
                                 <div class="box">
                                     <h4 data-compression="7" data-max="20" class="responsive align-center zero" style="font-size: 20px;">
                                         <span class="responsiveText-wrapper"><?php echo $objeto->getNombre(); ?></span></h4>
-                                    <img src="http://placehold.it/300x300/2ecc71/ffffff/&amp;text=Product+<?php echo $key; ?>">
+                                    <?php if ($key % 2 == 0) { ?>
+                                        <img src="http://placehold.it/300x300/3498db/ffffff/&amp;text=Product+<?php echo $key; ?>">
+                                    <?php } else { ?>
+                                        <img src="http://placehold.it/300x300/2ecc71/ffffff/&amp;text=Product+<?php echo $key; ?>">
+                                    <?php } ?>
                                     <p class="truncate"><?php echo $objeto->getDescripcion(); ?></p>
                                     <p><strong><?php echo $objeto->getPrecio(); ?> € </strong>
                                         <a href="do/?id=<?php echo $objeto->getId(); ?>&accion=insert">
@@ -50,28 +56,9 @@ if (isset($_SESSION["__cesta"])) {
                                         </a>
                                     </p>
                                 </div>
-                            </div>
-                            <?php
-                        }
-                        if ($key % 2 == 0) {
-                            ?>
-                            <div class="one fourth three-up-small-tablet two-up-mobile padded bounceInUp animated">
-                                <div class="box">
-                                    <h4 data-compression="7" data-max="20" class="responsive align-center zero" style="font-size: 20px;">
-                                        <span class="responsiveText-wrapper"><?php echo $objeto->getNombre(); ?></span></h4>
-                                    <img src="http://placehold.it/300x300/3498db/ffffff/&amp;text=Product+<?php echo $key; ?>">
-                                    <p class="truncate"><?php echo $objeto->getDescripcion(); ?></p>
-                                    <p><?php echo $objeto->getPrecio(); ?> €
-                                        <a href="do/?id=<?php echo $objeto->getId(); ?>&accion=insert">
-                                            <i class="icon-shopping-cart pull-right large"></i>
-                                        </a>
-                                    </p>
-                                </div>
-                            </div>
-                            <?php
-                        }
-                    }
-                    ?>
+                            </div><?php
+                        } //cerramos el foreach
+                        ?>
                 </article>
             </div>
         </div>

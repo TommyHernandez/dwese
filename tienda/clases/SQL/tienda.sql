@@ -12,7 +12,7 @@ create table venta(
     hora time,
     pago ENUM('si', 'no', 'espera'),
     direnvio varchar(35) not null,
-    nombre varchar(20),
+    nombre varchar(20)
 );
 create table detalleventa (
     id int primary key auto_increment,
@@ -26,6 +26,10 @@ create table detalleventa (
 );
 create table paypal(
     id int primary key auto_increment,
-    item_name varchar(),
-    verificado,
-)
+    item_name varchar(20),
+    verificado varchar(15),
+    gross double,
+    txn_id int,
+    payer_email varchar(30),
+    resto varchar(200)
+);
