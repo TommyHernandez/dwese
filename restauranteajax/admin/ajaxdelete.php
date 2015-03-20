@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: application/json');
 require '../require/comun.php';
-$login = Leer::get("login");
+$id = Leer::get("id");
 $pagina = Leer::get("pagina");
 $bd = new BaseDatos();
 $modelo = new ModeloPlato($bd);

@@ -10,7 +10,7 @@ function tostada(mensaje, tipo) {
         "closeButton": false,
         "debug": false,
         "progressBar": true,
-        "positionClass": "toast-top-full-width",
+        "positionClass": "toast-bottom-right",
         "onclick": null,
         "showDuration": "300",
         "hideDuration": "1000",
@@ -23,7 +23,6 @@ function tostada(mensaje, tipo) {
     };
     if (mensaje !== '') {
         if (tipo == '2') {
-            html
             toastr.warning(mensaje);
         } else if (tipo == '3') {
             toastr.error(mensaje);
@@ -39,7 +38,24 @@ function manejadorLogin() {
     var clave = "admin";
     ajaxLog();
 }
+function cargarPagina(pagina) {
+    pagina = pagina;
+    $.ajax({
+        url: "ajaxselect.php?pagina=" + pagina,
+        success: function (result) {
+            destruirTabla();
+            construirTabla(result);
+            var enlaces = document.getElementsByClassName("enlace");
+            for (var i = 0; i < enlaces.length; i++)
+                agregarEvento(enlaces[i]);
+        },
+        error: function () {
+            alert("error");
+        }
+    });
+    agregarEventoVerInsertar();
 
+}
 function ajaxLog() {
     $.ajax({
         url: "ajaxlogin.php?user=admin&pass=admin",
@@ -57,6 +73,60 @@ function ajaxLog() {
         }
     });
 }
+function verEditar() {
+    //Capturamos todos los elementos del DOM
+    var id = this.getAttribute('data-editar');
+
+    // LLamada AJAX para la insercion
+    $.ajax({
+        url: "ajaxget.php?id=" + id,
+        success: function (result) {
+            document.getElementById('name').value = result.plato.nombre;
+            document.getElementById('descripcion').value = result.plato.descripcion;
+            document.getElementById('priece').value = result.plato.precio;
+        },
+        error: function () {
+            tostada("AJAX FALLO al buscar el plato", 3);
+        }
+    });
+    /* ==== BOTON SI EN CASO DE QUE SE QUIERA EDITAR ====*/
+    $("#btisi").unbind("click");
+    $("#btisi").on("click", function () {
+        
+        // LLamada AJAX para la edicion
+        $.ajax({
+            url: "ajaxedit.php",
+            type: "POST",
+            data: {
+                id: id,
+                name: document.getElementById('name').value,
+                descripcion: document.getElementById('descripcion').value,
+                priece: document.getElementById('priece').value
+            },
+            success: function (result) {
+                alert(result.estado);
+                if (result.estado) {
+                    tostada("Editado correctamente");                   
+                } else {
+                    tostada("No se pudo Editar", 3);
+                }
+            },
+            error: function () {
+                tostada("No se estableció conexion o algo falló", 3);
+            }
+        });
+        $("#dialogomodalinsertar").modal('hide'); 
+    });
+    $("#btino").unbind("click");
+    $("#btino").on("click", function (e) {
+        //usando la tostada para dar un aviso
+        tostada("Cacelando!", 2);
+        $("#dialogomodalinsertar").modal('hide');
+    });
+    $('#dialogomodalinsertar').modal('show');
+
+}
+
 function enviarPlato() {
     $.ajax({
         url: "ajaxadd.php",
@@ -78,13 +148,14 @@ function enviarPlato() {
             tostada("No se estableció conexion o algo falló", 3);
         }
     });
+    cargarPagina(pagina);
 }
 function getListaPlatos(pagina) {
     var pagina = pagina;
     $.ajax({
         url: "ajaxselect.php?pagina=" + pagina,
         success: function (result) {
-            alert(result);
+
             destruirTabla();
             construirTabla(result);
             var enlaces = document.getElementsByClassName("enlace");
@@ -101,27 +172,6 @@ function destruirTabla() {
     while (div.hasChildNodes()) {
         div.removeChild(div.firstChild);
     }
-}
-function verEditar(){
-    $("#add-plato").deleteClass("oculto");
-    var id = this.getAttribute('data-editar');
-    $.ajax({
-            url: "ajaxget.php?id=" + id,
-            success: function (result) {
-                var nombre = document.getElementById('nombre').value = result.login;
-                var descripcion = document.getElementById('descp').value = "";
-                var precio = document.getElementById('precio').value = result.nombre;
-               for (var i = 0;i < result.rutas.lenght; i++) {
-                var img = $("<img/>").addClass("thumb");
-                img.attr("src",result.rutas.ruta);
-                $("#list").append(img);
-            }
-
-            },
-            error: function () {
-                tostada("AJAX FALLO al procesar al usuario", 3);
-            }
-        });
 }
 function construirTabla(datos) {
     var tabla = document.getElementById("lista-platos");
@@ -180,14 +230,22 @@ function agregarEvento(elemento) {
         cargarPagina(datahref)
     };
 }
-function confirmar(event, mensaje) {
-    if (confirm("desea borrar " + mensaje)) {
+/* ====  DIALOGOS de CONFIRMACION  ====  */
+function confirmar(evento, mensaje) {
+    evento.preventDefault(); //prevenimos la accion por defecto
+    var cm = document.getElementById("contenidomodal"); //capturamos el dialogo modal que esta definido en un Div
+    cm.innerHTML = "¿Borrar " + mensaje + "?"; //asignamos un mensaje
+    //ahora mediante Jquery capturamos  los botone sy le damos funcion
+    $("#btsi").unbind("click"); //eliminamos el escuchador click
+    $("#btsi").on("click", function () {
+        $("#dialogomodal").modal('hide');
+        //realizamos una peticion AJAX
         $.ajax({
-            url: "ajaxdelete.php?login=" + mensaje + "&pagina=" + pagina,
+            url: "ajaxdelete.php?id=" + mensaje + "&pagina=" + pagina,
             success: function (result) {
                 if (result.estado) {
                     tostada("Se ha borrado a " + mensaje + " correctametne");
-
+                    cargarPagina(pagina);
                 } else {
 
                 }
@@ -196,8 +254,16 @@ function confirmar(event, mensaje) {
                 tostada("Ha fallado el borrado", 3);
             }
         });
-    }
+    });
+    $("#btno").unbind("click");
+    $("#btno").on("click", function (e) {
+        //usando la tostada como un warning
+        tostada("Cacelando!", 2);
+        $("#dialogomodal").modal('hide');
+    });
+    $('#dialogomodal').modal('show');
 }
+;
 function definirEditar(clase) {
     var elementos, i;
     elementos = document.getElementsByClassName(clase);
@@ -219,22 +285,19 @@ function definirBorrar(clase) {
 /** ========== */
 
 /* == INICIAL == */
-
 $(document).ready(function () {
-    $("#btn-login").on("click", manejadorLogin);
     $("#p-add").on("click", function () {
         $("#add-plato").toggleClass("oculto");
     });
     $("#p-listar").on("click", function () {
         getListaPlatos(0);
     });
-    $("#enviar-plato").on("click", enviarPlato);
+    $("#sendplt").on("click", enviarPlato);
     function handleFileSelect(evt) {
         var files = evt.target.files; // FileList object
 
         // Loop through the FileList and render image files as thumbnails.
         for (var i = 0, f; f = files[i]; i++) {
-
             // Only process image files.
             if (!f.type.match('image.*')) {
                 continue;
@@ -257,6 +320,5 @@ $(document).ready(function () {
             reader.readAsDataURL(f);
         }
     }
-
     document.getElementById('files').addEventListener('change', handleFileSelect, false);
 });

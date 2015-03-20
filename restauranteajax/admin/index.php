@@ -8,10 +8,47 @@
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="../css/estilos.css" type="text/css">
         <link rel="stylesheet" href="../js/toast/toastr.css">
+        <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/toast/toastr.js"></script>
+        <script src="js/main.js"></script>
     </head>
 
     <body>
-        <!-- Fin del login -->
+        <div id="dialogomodalinsertar" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- dialog body -->
+                    <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <?php
+                        include '../include/formulrioinsercion.php';
+                        ?>
+                    </div>
+                    <!-- dialog buttons -->
+                    <div class="modal-footer">
+                        <button type="button" id="btisi" class="btn btn-success">Enviar</button>
+                        <button type="button" id="btino" class="btn btn-warning">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="dialogomodal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- dialog body -->
+                    <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <span id="contenidomodal">Contenido modal</span>
+                    </div>
+                    <!-- dialog buttons -->
+                    <div class="modal-footer">
+                        <button type="button" id="btsi" class="btn btn-success">Aceptar</button>
+                        <button type="button" id="btno" class="btn btn-warning">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div id="master">
             <nav class="navbar navbar-inverse navbar-fixed-top">
                 <div class="container">
@@ -66,12 +103,13 @@
                             <label>Precio</label>
                             <input type="number" id="precio" value="" class="form-control" placeholder="Precio del plato" />
                             <input type="file" id="files" name="files[]" />
-                             <input type="file" id="files" name="files[]" />
-                              <input type="file" id="files" name="files[]" />
+                            <input type="file" id="files" name="files[]" />
+                            <input type="file" id="files" name="files[]" />
                             <output id="list"></output>
                         </div>
-                        <input type="button" id="enviar-plato" class="btn btn-default" value="Enviar" name="send" />  
+                        <input type="button" id="sendplt" class="btn btn-default" value="Enviar" name="send" />  
                     </form>
+
                 </div>
                 <div class="col-md-12">
                     <table id="lista-platos" class="table table-bordered">
@@ -82,15 +120,6 @@
             </div>
             <!-- /.container -->
         </div>
-        <!-- /.maestro -->
-        <!-- Bootstrap core JavaScript
-            ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
-        <script src="../js/bootstrap.min.js"></script>
-        <script src="../js/toast/toastr.js"></script>
-        <script src="js/main.js"></script>
-
     </body>
-
+    <?php include '../include/pie.php'; ?>
 </html>

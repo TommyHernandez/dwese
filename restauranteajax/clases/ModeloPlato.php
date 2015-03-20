@@ -38,6 +38,26 @@ class ModeloPlato {
         return -1;
     }
 
+    function edit(Plato $objeto, $idpk) {
+        $asignacion = "id = :id, nombre = :nombre,descripcion = :descripcion,precio = :precio";
+        $condicion = "id = $idpk";
+        $parametros["id"] = $objeto->getId();
+         $parametros["nombre"] = $objeto->getNombre();
+          $parametros["descripcion"] = $objeto->getDescripcion();
+           $parametros["precio"] = $objeto->getPrecio();
+
+        return $this->editConsulta($asignacion, $condicion, $parametros);
+    }
+
+    function editConsulta($asignacion, $condicion = "1=1", $parametros = array()) {
+        $sql = "update $this->tabla set $asignacion where $condicion";
+        $r = $this->bd->setConsulta($sql, $parametros);
+        if (!$r) {
+            return -1;
+        }
+        return $this->bd->getNumeroFilas();
+    }
+
     function getListPagina($pagina = 0, $rpp = 3, $condicion = "1=1", $parametros = array(), $orderby = "1") {
         $pos = $pagina * $rpp;
         $sql = "select * from "

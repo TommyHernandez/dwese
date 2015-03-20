@@ -7,8 +7,8 @@ function autoload($clase) {
     }
 }
 spl_autoload_register('autoload');
-/*$sesion = SesionSingleton::getSesion();
+$sesion = SesionSingleton::getSesion();
 $autentificado = $sesion->isAutentificado();
 $mensaje = "";
 $tipo = 0;
-$ajax = FALSE;*/
+$ajax = TRUE;

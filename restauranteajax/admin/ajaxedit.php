@@ -2,20 +2,14 @@
 header('Content-Type: application/json');
 require '../require/comun.php';
 $bd = new BaseDatos();
-$modelo = new ModeloUsuario($bd);
-$objeto = new Usuario();
-$loginpk = Leer::get("loginpk");
-$objeto->setLogin(Leer::get("login"));
-$objeto->setClave(Leer::get("clave"));
-$objeto->setNombre(Leer::get("nombre"));
-$objeto->setApellidos(Leer::get("apellidos"));
-$objeto->setEmail(Leer::get("email"));
-$objeto->setRol(Leer::get("rol"));
-$objeto->setIsroot(Leer::get("isroot"));
-$objeto->setIsactivo(Leer::get("isactivo"));
-//$objeto->setFechaalta(Leer::get("fechaalta"));
-//$objeto->setFechalogin(Leer::get("fechalogin"));
-$r = $modelo->edit($objeto, $loginpk);
+$modelo = new ModeloPlato($bd);
+$id = Leer::request("id");
+$idpk = $id;
+$nombre = Leer::request("name");
+$descripcion = Leer::request("descripcion");
+$precio = Leer::request("priece");
+$objeto = new Plato($id, $nombre, $descripcion, $precio);
+$r = $modelo->edit($objeto, $idpk);
 if ($r) {
     echo "{";
     echo '"estado":true}';

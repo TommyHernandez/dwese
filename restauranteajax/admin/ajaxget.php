@@ -7,4 +7,4 @@ $modelo = new ModeloPlato($bd);
 $modeloFoto = new ModeloFoto($bd);
 echo "{\n";
 echo '"rutas":'.$modeloFoto->getRutaJSON($id).','; 
-echo '"platos":'.$modelo->getJSON($id).'}';
+echo '"plato":'.$modelo->getJSON($id).'}';
